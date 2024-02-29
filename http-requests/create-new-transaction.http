@@ -1,0 +1,7 @@
+POST http://localhost:8083/transactions
+Content-Type: application/json
+
+{
+  "Amount": 6,
+  "Spent": false
+}
