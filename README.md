@@ -43,7 +43,9 @@ To get started with the Bitcoin Wallet application, follow these steps:
 
 ## Running Tests
 
-To run all tests for the project, execute the following command:
+To ensure the reliability of the application, all tests are automatically executed during the Docker build process. If any test case fails, the Docker build will fail, indicating that there are issues that need to be addressed before deploying the application.
+
+To run the tests locally, you can execute the following command:
 
 ```bash
 go test ./...
