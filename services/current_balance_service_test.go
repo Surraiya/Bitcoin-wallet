@@ -1,42 +1,36 @@
 package services_test
 
-// type mockTransactionRepository struct {
-// 	Transactions []models.Transaction
-// 	Err          error
-// }
+import (
+	"bitcoin-wallet/models"
+	"bitcoin-wallet/services"
+	"math"
+	"testing"
 
-// func (m *mockTransactionRepository) GetAll() ([]models.Transaction, error) {
-// 	return m.Transactions, m.Err
-// }
+	"github.com/google/uuid"
+	"github.com/stretchr/testify/assert"
+)
 
-// func (m *mockTransactionRepository) Save(transaction models.Transaction) error {
-// 	return nil // Implement according to your test requirements
-// }
+func TestGetCurrentBalance_Success(t *testing.T) {
+	expectedTransactions := []models.Transaction{
+		{Id: uuid.New().String(), Amount: 0.1},
+		{Id: uuid.New().String(), Amount: 0.2},
+	}
+	mockRepo := &mockTransactionRepo{
+		mockGetAll: func() ([]models.Transaction, error) {
+			return expectedTransactions, nil
+		},
+	}
+	service := services.NewCurrentBalanceService(mockRepo)
 
-// func (m *mockTRepository) DeleteAll() error {
-// 	return m.Err //
-// }
+	expectedBalance := 0.1 + 0.2
+	expectedBalanceRounded := round(expectedBalance, 2) // Round to 2 decimal places
 
-// func TestGetCurrentBalance_Success(t *testing.T) {
-// 	mockRepo := &mockTransactionRepository{
-// 		Transactions: []models.Transaction{
-// 			{Amount: 0.1},
-// 			{Amount: 0.2},
-// 		},
-// 	}
+	balance, err := service.GetCurrentBalance()
+	assert.NoError(t, err)
+	assert.Equal(t, expectedBalanceRounded, round(balance.BTC, 2))
+}
 
-// 	//service := services.NewCurrentBalanceService(mockRepo)
-
-// 	expectedBalance := 0.1 + 0.2
-// 	expectedBalanceRounded := round(expectedBalance, 2) // Round to 2 decimal places
-
-// 	balance, err := service.GetCurrentBalance()
-// 	assert.NoError(t, err)
-// 	assert.Equal(t, expectedBalanceRounded, round(balance.BTC, 2))
-// }
-
-// // round rounds a float64 number to the specified number of decimal places
-// func round(num float64, places int) float64 {
-// 	shift := math.Pow(10, float64(places))
-// 	return math.Round(num*shift) / shift
-// }
+func round(num float64, places int) float64 {
+	shift := math.Pow(10, float64(places))
+	return math.Round(num*shift) / shift
+}

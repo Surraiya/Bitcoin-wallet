@@ -32,26 +32,18 @@ func TestCreateNewMoneyTransfer_Success(t *testing.T) {
 	}
 	controller := controllers.NewMoneyTransferController(mockService)
 
-	// Create a test request body
 	requestBody := models.Transfer{AmountInEuro: 100.0}
 	jsonBody, _ := json.Marshal(requestBody)
 
-	// Create a test HTTP request
 	req, _ := http.NewRequest("POST", "/money-transfer", bytes.NewBuffer(jsonBody))
 	req.Header.Set("Content-Type", "application/json")
-
-	// Create a test HTTP response recorder
 	w := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(w)
 	c.Request = req
 
-	// Call the controller method
 	controller.CreateNewMoneyTransfer(c)
 
-	// Check if the response status code is 201 (Created)
-	assert.Equal(t, http.StatusCreated, w.Code)
-
-	// Check if the response body contains the expected message
+	assert.Equal(t, http.StatusCreated, w.Code, "Status code should be http.StatusCreated")
 	expectedResponse := `{"message":"New Money Transfer Created!","transfer Amount":{"amount_in_euro":100}}`
-	assert.Equal(t, expectedResponse, w.Body.String())
+	assert.Equal(t, expectedResponse, w.Body.String(), "Response body should match expected JSON")
 }

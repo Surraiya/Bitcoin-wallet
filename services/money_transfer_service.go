@@ -38,45 +38,6 @@ func (m *moneyTransferService) CreateNewMoneyTransfer(amountEuro float64) error 
 		return err
 	}
 
-	// for _, transaction := range transactions {
-	// 	if transaction.Spent {
-	// 		continue
-	// 	}
-
-	// 	if transaction.Amount >= transferAmount {
-	// 		transaction.Spent = true
-	// 		remainingAmount = transaction.Amount - transferAmount
-	// 		fmt.Println("The amount in transaction is more than transfer amount")
-	// 		fmt.Printf("transaction amount: %f and transfer amount now: %f", transaction.Amount, transferAmount)
-
-	// 		err := m.repo.Update(transaction)
-	// 		fmt.Println("After update spent should be true")
-	// 		fmt.Println(transaction)
-	// 		if err != nil {
-	// 			return fmt.Errorf("error saving unspent transactions as spent")
-	// 		}
-	// 		break
-	// 	}
-
-	// 	fmt.Println("The amount in transfer is more than transaction amount")
-	// 	fmt.Printf("transaction amount: %f and transfer amount now: %f", transaction.Amount, transferAmount)
-	// 	transaction.Spent = true
-	// 	transferAmount -= transaction.Amount
-
-	// 	err := m.repo.Update(transaction)
-	// 	if err != nil {
-	// 		return fmt.Errorf("error saving unspent transactions as spent")
-	// 	}
-	// 	fmt.Println("After update spent should be true")
-	// 	fmt.Println(transaction)
-	// }
-
-	// if remainingAmount >= 0 {
-	// 	if err := m.createTransaction(remainingAmount, false); err != nil {
-	// 		return err
-	// 	}
-	// }
-
 	return nil
 }
 

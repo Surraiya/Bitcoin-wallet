@@ -9,53 +9,42 @@ import (
 )
 
 func TestCalculateCurrentBalance(t *testing.T) {
-	// Create test transactions
 	transactions := []models.Transaction{
 		{Amount: 10, Spent: false},
 		{Amount: 20, Spent: false},
 		{Amount: 5, Spent: true},
 	}
 
-	// Call the function to calculate the balance
 	balance := utils.CalculateCurrentBalance(transactions)
 
-	// Expected balance calculation: (10 + 20) - 5 = 25
-	expectedBalance := 25.0
+	expectedBalance := 30.0
 
-	// Assert that the calculated balance matches the expected balance
-	assert.Equal(t, expectedBalance, balance)
+	assert.Equal(t, expectedBalance, balance, "balance should be equal to 30.0")
 }
 
 func TestCalculateCurrentBalance_NoTransactions(t *testing.T) {
-	// No transactions provided
 	var transactions []models.Transaction
 
-	// Call the function to calculate the balance
 	balance := utils.CalculateCurrentBalance(transactions)
 
-	// Expected balance calculation: 0 (no transactions)
 	expectedBalance := 0.0
 
-	// Assert that the calculated balance matches the expected balance
-	assert.Equal(t, expectedBalance, balance)
+	assert.Equal(t, expectedBalance, balance, "balance should be equal to 0.0")
 }
 
 func TestCalculateCurrentBalance_AllUnspent(t *testing.T) {
-	// Create test transactions where all are unspent
 	transactions := []models.Transaction{
 		{Amount: 10, Spent: false},
 		{Amount: 20, Spent: false},
 		{Amount: 5, Spent: false},
 	}
 
-	// Call the function to calculate the balance
 	balance := utils.CalculateCurrentBalance(transactions)
 
 	// Expected balance calculation: 10 + 20 + 5 = 35
 	expectedBalance := 35.0
 
-	// Assert that the calculated balance matches the expected balance
-	assert.Equal(t, expectedBalance, balance)
+	assert.Equal(t, expectedBalance, balance, "balance should be equal to 35")
 }
 
 func TestCalculateCurrentBalance_AllSpent(t *testing.T) {
@@ -66,12 +55,9 @@ func TestCalculateCurrentBalance_AllSpent(t *testing.T) {
 		{Amount: 5, Spent: true},
 	}
 
-	// Call the function to calculate the balance
 	balance := utils.CalculateCurrentBalance(transactions)
 
-	// Expected balance calculation: 0 (all transactions are spent)
 	expectedBalance := 0.0
 
-	// Assert that the calculated balance matches the expected balance
-	assert.Equal(t, expectedBalance, balance)
+	assert.Equal(t, expectedBalance, balance, "Balance should be 0.0 as all spent is true")
 }
