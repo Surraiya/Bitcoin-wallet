@@ -2,5 +2,5 @@ POST http://localhost:8083/money-transfers
 Content-Type: application/json
 
 {
-  "amount_in_euro": 83235.9245274292
+  "amount_in_euro": 765444373.5227079999
 }

@@ -23,7 +23,6 @@ func NewTransactionService(repo repositories.TransactionRepository) TransactionS
 
 func (s *transactionService) SaveTransaction(transaction models.Transaction) error {
 	if err := validator(transaction); err != nil {
-		//	return err.Error()
 		return err
 	}
 
