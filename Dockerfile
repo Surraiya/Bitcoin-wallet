@@ -10,6 +10,9 @@ COPY . .
 # Build the Go application
 RUN go build -o main .
 
+# Run tests
+RUN go test ./...
+
 # Expose the port that your application listens on
 EXPOSE 8083
 
