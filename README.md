@@ -16,18 +16,23 @@ To get started with the Bitcoin Wallet application, follow these steps:
    ```bash
    git clone https://github.com/Surraiya/Bitcoin-wallet.git
    ```
+
+2. Navigate to the project directory:
+   ```bash
+   cd Bitcoin-wallet
+   ```
    
-2. Build the Docker image:
+3. Build the Docker image:
     ```bash
     docker build -t bitcoin-wallet .
     ```
     
-3. Run the Docker container:
+4. Run the Docker container:
    ```bash
    docker run -p 8083:8083 bitcoin-wallet
    ```
    
-4. Access the application in your web browser at http://localhost:8083
+5. Access the application in your web browser at http://localhost:8083
 
 ## API Endpoints
 
@@ -36,6 +41,13 @@ To get started with the Bitcoin Wallet application, follow these steps:
 - **POST /money-transfers**: Transfer money from one account to another.
 - **GET /current-balance**: Get the current balance.
 
+## Running Tests
+
+To run all tests for the project, execute the following command:
+
+```bash
+go test ./...
+```
 
 ## Dependencies
 
